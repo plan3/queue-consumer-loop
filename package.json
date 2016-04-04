@@ -1,6 +1,6 @@
 {
   "name": "queue-consumer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generic Queue consumer",
   "main": "index.js",
   "scripts": {

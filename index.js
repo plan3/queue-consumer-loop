@@ -19,7 +19,7 @@ class QueueConsumer {
                 })
                 .then(() => this.queue.deleteMessage(message))
                 .catch(err => {
-                    this.errorLogger(`Error processing message ${message.MessageId}`, err);
+                    this.errorLogger(`Error processing message ${message.MessageId}`, err, err.stack);
                 });
         };
         this.queue.getNextNonEmptyBatch()
@@ -27,7 +27,7 @@ class QueueConsumer {
                 Promise.all(messages.map(m => processMessage(m, callback))))
             .then(() => this.consume(callback))
             .catch(err => {
-                this.errorLogger(`Error processing messages`, err);
+                this.errorLogger(`Error processing messages`, err, err.stack);
             });
     }
 }
