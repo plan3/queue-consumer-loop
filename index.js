@@ -12,7 +12,7 @@ class QueueConsumer {
     consume(callback) {
         this.logger(`Consuming messages from ${this.queue.queueUrl}`);
         const processMessage = (message) => {
-            return callback(message.Body, message.Attributes)
+            return Promise.resolve(callback(message.Body, message.Attributes))
                 .then(() => this.queue.deleteMessage(message))
                 .catch(err => {
                     this.errorLogger(`Error processing message ${message.MessageId}`, err, err.stack);
