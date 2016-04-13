@@ -1,6 +1,6 @@
 'use strict';
 
-const Gandalf = require('gandalf');
+const Gandalf = require('smp-gandalf');
 
 class QueueConsumer {
     constructor(config) {
