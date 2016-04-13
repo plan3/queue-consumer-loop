@@ -15,5 +15,8 @@
   },
   "publishConfig": {
     "registry": "https://npm-proxy.fury.io/WzxWmkrJq9z7r3fXsD-H/h_app49152759/"
+  },
+  "dependencies": {
+    "gandalf": "0.0.1"
   }
 }
