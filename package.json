@@ -1,6 +1,6 @@
 {
   "name": "queue-consumer",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Generic Queue consumer",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "eslint-config-vgno": "^5.0.0",
     "eslint-plugin-promise": "^1.1.0"
   },
-  "publishConfig": {
-    "registry": "https://npm-proxy.fury.io/WzxWmkrJq9z7r3fXsD-H/h_app49152759/"
+  "dependencies": {
+    "smp-gandalf": "0.0.1"
   }
 }
