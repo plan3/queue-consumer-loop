@@ -13,7 +13,7 @@ class QueueConsumer {
 
         const processMessage = (message) => {
             return Promise.resolve()
-                .then(() => callback(message.Body, message.Attributes))
+                .then(() => callback(message.Body, message.MessageAttributes))
                 .then(() => this.queue.deleteMessage(message))
                 .catch((err) => {
                     this.logger.error(`Error processing message ${message.MessageId}`, err, err.stack);
