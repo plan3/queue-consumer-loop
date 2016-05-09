@@ -1,11 +1,11 @@
 'use strict';
 
-const Gandalf = require('smp-gandalf');
+const logger = console;
 
 class QueueConsumer {
     constructor(config) {
         this.queue = config.queue;
-        this.logger = new Gandalf(config.logger);
+        this.logger = config.logger || logger;
     }
 
     consume(callback) {
