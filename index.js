@@ -20,10 +20,10 @@ class QueueConsumer {
                 });
         };
 
-        this.queue.getNextNonEmptyBatch()
+        this.queue.getNextNonEmptyBatch() // eslint-disable-line promise/catch-or-return
             .then((messages) => Promise.all(messages.map(m => processMessage(m, callback))))
             .catch(err => {
-                this.logger.error(`Error processing messages`, err, err.stack);
+                this.logger.error('Error processing messages', err, err.stack);
             })
             .finally(() => this.consume(callback));
     }
