@@ -1,11 +1,11 @@
 'use strict';
 
-const logger = console;
+const defaultLogger = console;
 
 class QueueConsumer {
     constructor(config) {
         this.queue = config.queue;
-        this.logger = config.logger || logger;
+        this.logger = config.logger || defaultLogger;
     }
 
     consume(callback) {
@@ -13,7 +13,7 @@ class QueueConsumer {
 
         const processMessage = (message) => {
             return Promise.resolve()
-                .then(() => callback(message.Body, message.MessageAttributes))
+                .then(() => callback(message.Body, message.MessageAttributes, message.MessageId))
                 .then(() => this.queue.deleteMessage(message))
                 .catch((err) => {
                     this.logger.error(`Error processing message ${message.MessageId}`, err, err.stack);
