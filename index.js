@@ -22,6 +22,5 @@ module.exports = function({queue, logger = defaultLogger}) {
             })
             .finally(() => consumeLoop(callback));
     };
-    return consumeLoop
-}
-;
+    return consumeLoop;
+};
