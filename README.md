@@ -10,7 +10,7 @@ To consume messages you provide a callback to `consume` function. Example:
 const queueConsumerLoop = require('queue-consumer')({
     queue: <the_queue>
 });
-const callback = function(messageBody, messageAttributes) {
+const callback = function(messageBody, messageAttributes, messageId) {
     // handle message
 };
 queueConsumerLoop(callback);
