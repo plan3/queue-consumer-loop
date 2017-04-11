@@ -22,3 +22,4 @@ this will run inifnite loop of callback invocations for each message. The messag
 The queue is assumed to be an object with following functions:
   * `getNextNonEmptyBatch()` - returns next batch of messags to be processed
   * `deleteMessage(message)` - deletes given message (marks as processed)
+
