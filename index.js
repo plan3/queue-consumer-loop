@@ -2,31 +2,26 @@
 
 const defaultLogger = console;
 
-class QueueConsumer {
-    constructor(config) {
-        this.queue = config.queue;
-        this.logger = config.logger || defaultLogger;
-    }
-
-    consume(callback) {
-        this.logger.info(`Consuming messages from ${this.queue.queueUrl}`);
+module.exports = function({queue, logger = defaultLogger}) {
+    let consumeLoop = function(callback) {
+        logger.info(`Consuming messages from ${queue.queueUrl}`);
 
         const processMessage = (message) => {
             return Promise.resolve()
                 .then(() => callback(message.Body, message.MessageAttributes, message.MessageId))
-                .then(() => this.queue.deleteMessage(message))
+                .then(() => queue.deleteMessage(message))
                 .catch((err) => {
-                    this.logger.error(`Error processing message ${message.MessageId}`, err, err.stack);
+                    logger.error(`Error processing message ${message.MessageId}`, err, err.stack);
                 });
         };
 
-        this.queue.getNextNonEmptyBatch() // eslint-disable-line promise/catch-or-return
+        queue.getNextNonEmptyBatch() // eslint-disable-line promise/catch-or-return
             .then((messages) => Promise.all(messages.map(m => processMessage(m, callback))))
             .catch(err => {
-                this.logger.error('Error processing messages', err, err.stack);
+                logger.error('Error processing messages', err, err.stack);
             })
-            .finally(() => this.consume(callback));
-    }
+            .finally(() => consumeLoop(callback));
+    };
+    return consumeLoop
 }
-
-module.exports = QueueConsumer;
+;
