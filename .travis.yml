@@ -4,10 +4,17 @@ node_js:
   - 5
   - 4
 install:
-  - npm install --registry $NPM_CONFIG_REGISTRY
+  - npm install
 script:
   - npm run lint
   - npm run nsp
 branches:
   only:
   - master
+deploy:
+  provider: npm
+  email: "billing.media@schibsted.media"
+  api_key: "79baa57c-6d32-427e-b59c-3dc7c7bee859"
+  on: 
+    branch: master
+    node: '6'
